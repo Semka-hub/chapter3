@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class ThirdPart {
 
     public static void main(String[] args) {
@@ -15,6 +17,8 @@ public class ThirdPart {
         repeatTask(10, myClosure::print);
 
 
+        /* Задание 2 */
+        demonstrateMoving();
     }
 
     /* Функция для запуска лямбда-выражения task times раз */
@@ -29,6 +33,51 @@ public class ThirdPart {
         void print();
     }
 
+    /* Метод, осуществлящий несколько переходов от первоначальной
+     координаты и выводящий координату после каждого перехода. */
+    public static void demonstrateMoving() {
+
+        Point location = new Point(0, 0);
+        Directions[] directions =
+                new Directions[]{Directions.UP, Directions.UP,
+                        Directions.LEFT, Directions.DOWN,
+                        Directions.LEFT, Directions.DOWN,
+                        Directions.DOWN, Directions.RIGHT,
+                        Directions.RIGHT, Directions.DOWN, Directions.RIGHT};
+
+        for (Directions dir :
+                directions) {
+            location = move(location, dir);
+            System.out.println("Движение: " + dir +
+                    ". Текущая координата (" + location.x + ", " + location.y + ")");
+        }
+    }
+
+    /* Метод, принимающий координаты и направление поворота */
+    public static Point move(Point loc, Directions direction) {
+        switch (direction) {
+            case UP:
+                loc.y++;
+                break;
+            case DOWN:
+                loc.y--;
+                break;
+            case LEFT:
+                loc.x--;
+                break;
+            case RIGHT:
+                loc.x++;
+                break;
+        }
+
+        return loc;
+    }
 }
 
-
+/* Перечисление возможных направлений движения */
+enum Directions {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}
